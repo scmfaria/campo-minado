@@ -17,6 +17,7 @@ class GameBoard(val qtdLine: Int, val qtdColumn: Int, val qtdMine: Int) {
             fields.add(ArrayList())
             for (column in 0 until qtdColumn) {
                 val newField = Field(line, column)
+                newField.onEvent(this::verifyDefeatOrVictory)
                 fields[line].add(newField)
             }
         }
@@ -58,7 +59,30 @@ class GameBoard(val qtdLine: Int, val qtdColumn: Int, val qtdMine: Int) {
         }
     }
 
+    private fun goalAchieved(): Boolean {
+        var playerWon = true
+        forEachField { if(!it.goalAchieved) playerWon = false }
+        return playerWon
+    }
+
+    private fun verifyDefeatOrVictory(field: Field, event: EventField) {
+        if (event == EventField.EXPLOSION) {
+            callbacks.forEach { it(GameBoardEvent.DEFEAT) }
+        } else if (goalAchieved()) {
+            callbacks.forEach { it(GameBoardEvent.WINNING) }
+        }
+    }
+
     fun forEachField(callback: (Field) -> Unit) {
         fields.forEach { line -> line.forEach(callback) }
+    }
+
+    fun onEvent(callback: (GameBoardEvent) -> Unit) {
+        callbacks.add(callback)
+    }
+
+    fun restart() {
+        forEachField { it.reboot() }
+        drawMines()
     }
 }
