@@ -1,9 +1,12 @@
 package model
 
+import java.util.*
+import kotlin.collections.ArrayList
+
 enum class GameBoardEvent { WINNING, DEFEAT }
 
-class GameBoard(val qtdLine: Int, val qtdColumn: Int, val qtdMine: Int) {
-    private val fields = ArrayList<ArrayList<Field>>
+class GameBoard(val qtdLine: Int, val qtdColumn: Int, var qtdMine: Int) {
+    private val fields = ArrayList<ArrayList<Field>>()
     private val callbacks = ArrayList<(GameBoard) -> Unit>()
 
     init {
@@ -45,7 +48,7 @@ class GameBoard(val qtdLine: Int, val qtdColumn: Int, val qtdMine: Int) {
 
         var drawnLine = -1
         var drawnColumn = -1
-        var qtdCurrentMine = 0
+        val qtdCurrentMine = 0
 
         while (qtdCurrentMine < this.qtdMine) {
             drawnLine = generate.nextInt(qtdLine)
@@ -61,7 +64,7 @@ class GameBoard(val qtdLine: Int, val qtdColumn: Int, val qtdMine: Int) {
 
     private fun goalAchieved(): Boolean {
         var playerWon = true
-        forEachField { if(!it.goalAchieved) playerWon = false }
+        forEachField { if(!it.goalArchieved) playerWon = false }
         return playerWon
     }
 
@@ -78,7 +81,7 @@ class GameBoard(val qtdLine: Int, val qtdColumn: Int, val qtdMine: Int) {
     }
 
     fun onEvent(callback: (GameBoardEvent) -> Unit) {
-        callbacks.add(callback)
+        callbacks.add { callback }
     }
 
     fun restart() {

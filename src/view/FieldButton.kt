@@ -1,10 +1,12 @@
 package view
 
+import model.EventField
 import model.Field
 import java.awt.Font
 import javax.swing.JButton
 import javax.swing.BorderFactory
 import java.awt.Color
+import java.awt.Color.*
 
 private val COLOR_BG_NORMAL = Color(184, 184, 184)
 private val COLOR_BG_MARK = Color(8, 179, 247)
@@ -16,7 +18,7 @@ class FieldButton(private val field: Field): JButton() {
     init {
         font = font.deriveFont(Font.BOLD)
         background = COLOR_BG_NORMAL
-        isOpague = true
+        isOpaque = true
         border = BorderFactory.createBevelBorder(0)
         addMouseListener(MouseClickListener(field, { it.open() }, { it.changeMarkup() }))
 
@@ -65,7 +67,6 @@ class FieldButton(private val field: Field): JButton() {
 
     private fun applyStandardStyle() {
         background = COLOR_BG_NORMAL
-        foreground = BorderFactory.createBevelBorder(0)
         text = ""
     }
 }

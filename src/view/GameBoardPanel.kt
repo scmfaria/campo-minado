@@ -2,7 +2,7 @@ package view
 
 import model.GameBoard
 import java.awt.GridLayout
-import javax.swing.Panel
+import javax.swing.JPanel
 
 class GameBoardPanel(gameBoard: GameBoard) : JPanel() {
 

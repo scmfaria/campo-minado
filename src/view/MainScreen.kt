@@ -1,7 +1,9 @@
 package view
 
 import model.GameBoard
+import model.GameBoardEvent
 import javax.swing.JFrame
+import javax.swing.JOptionPane
 
 fun main(args: Array<String>) {
     MainScreen()
@@ -30,7 +32,7 @@ class MainScreen : JFrame() {
                 GameBoardEvent.DEFEAT -> "Você perdeu..."
             }
 
-            jOptionPane.showMessageDialog(this, msg)
+            JOptionPane.showMessageDialog(this, msg)
             gameBoard.restart()
 
             gameBoardPanel.repaint()

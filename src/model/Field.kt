@@ -19,7 +19,7 @@ data class Field(val line: Int, val column: Int) {
 
     val qtdMarkedNeighbors: Int get() = neighborsList.filter { it.mine }.size
 
-    val safeNeighbors: Boolean
+    private val safeNeighbors: Boolean
         get() = neighborsList.map { it.safe }.reduce { result, safe -> result && safe }
 
     fun addNeighbor(neighbor: Field) {
