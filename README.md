@@ -1,5 +1,5 @@
-# Campo Minado
+# Minesweeper
 
-### Esse projeto é o game Campo Minado feito na linguagem Kotlin para fins de estudo
+#### This project is the Minesweeper game made in Kotlin language for study purposes.
 
-Neste projeto é usado alguns conceitos do básicos do Kotlin, como função passado como parâmetro para outra função, callbacks, etc.
+In this project some basic Kotlin concepts are used, such as a function passed as a parameter to another function, lambdas, callbacks, etc.
